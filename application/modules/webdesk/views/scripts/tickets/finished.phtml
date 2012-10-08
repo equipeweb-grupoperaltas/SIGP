@@ -1,0 +1,84 @@
+<div class="clearfix"></div>
+<div id="view-content">
+
+    <a href="/webdesk/tickets/new" id="links" class="black">
+        <img src="<?= $this->baseUrl('/images/icons/001_03.png') ?>" title="Novo Ticket" alt="Novo Ticket"/>
+        Abrir novo ticket
+    </a>
+
+
+    <div class="clearfix"></div>
+    <div id="list" class="tickets">
+        <table id="list-ticktes">
+            <colgroup>
+                <col width="10%">
+                <col width="20%">
+                <col width="37%">
+                <col width="18%">
+                <col width="15%">
+            </colgroup>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Prioridade</th>
+                    <th>Assunto</th>
+                    <th>Última Interação</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php if (sizeof($this->paginator)): ?>
+
+               <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#list-ticktes').dataTable({
+                            "bLengthChange": false,
+                            "aaSorting": [[ 3, "desc" ]]
+                        });
+                    } );
+                </script>
+                <?php foreach ($this->paginator as $ticket): ?>
+
+                    <tr>  
+                        <td>
+                            <a href="<?= $this->getUrl(array("module" => "webdesk", "controller" => "tickets", "action" => "index", "ticket" => $ticket->numero)) ?>">
+                                <?= $ticket->numero ?>
+                            </a>
+                        </td>
+                        <td><? if ($ticket->prioridade == "1") {
+                            echo "Normal";
+                        } else if ($ticket->prioridade == "0") {
+                            echo "Urgente";
+                        } else {
+                            echo "baixa";
+                        } ?></td>
+                        <td><?= $ticket->assunto ?></td>
+                        <td><?= $ticket->data ?></td>
+                        <td><? if ($ticket->status == "0") {
+                echo "Pendente";
+            } elseif ($ticket->status == "1") {
+                echo "Aguardando Interação";
+            } elseif ($ticket->status == "2") {
+                echo "Finalizado";
+            } else {
+                echo "Cancelado";
+            } ?></td>
+                    </tr>
+
+    <?php endforeach; ?>
+<?php else: ?>
+                <tr>
+                    <td colspan="4">Nenhum ticket em seu nome!</td>
+                </tr>
+<?php endif; ?>
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+</div>
+<div class="clearfix"></div>

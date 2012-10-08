@@ -1,0 +1,20 @@
+<div id="login_usuario">
+
+    <div class="left">
+        <p>SIGP Grupo Peraltas (Sistema Integrado Grupo Peraltas),<br/>
+           para entrar utilize seu login e senha no formulario ao lado. <br/>
+            <br/> Em caso de duvidas envie um email para <a href="mailto:equipe_web@fundacaoceu.org.br" title="Enviar Email">equipe_web@fundacaoceu.org.br</a> <br/>
+        </p>
+         <span style="font-size: 12px; font-weight: bolder;">Obs.: O Usuario e senha são os mesmo utilizados no Login de seu computador</span> <br/>
+    </div>
+
+
+    <div class="right">
+        <h1>Entrar no sistema</h1>
+        <?php echo ( sizeof($this->messages) > 0 ) ? '<div style="color: #f00;">' . $this->messages[0] . '</div>' : ""; ?>
+        <?= $this->formulario ?>
+    </div>
+
+
+</div>
+

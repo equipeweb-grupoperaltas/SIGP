@@ -1,0 +1,46 @@
+<!--
+ *@author Fabio Pratta <fabiobrotas@hotmail.com> 
+ *@copyright Copyright - SIGP
+ *@version 1.0 01/10/2012
+-->
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        $("select#departamento").change(function(){
+            $.getJSON("/webdesk/functions/getusersjson",{id: $(this).val(), ajax: 'true'}, function(j){
+                var options = '';
+                for (var i = 0; i < j.length; i++) {
+                   
+                    options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+                }
+                $("select#usuario").html(options);
+            })
+        });
+        
+        
+        $('#datalimite').datetimepicker(
+            {
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior'
+            
+        });
+
+    })
+</script>
+
+
+<div class="clearfix"></div>
+<div id="view-content">
+
+    <h1>Abrir novo ticket</h1>
+
+
+    <?= $this->formulario ?>
+
+</div>
+<div class="clearfix"></div>

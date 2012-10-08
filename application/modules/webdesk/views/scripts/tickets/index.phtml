@@ -1,0 +1,155 @@
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        
+        
+        $('.interacao').slideToggle('fast', function() {
+            //  $(".interacao-header-fixo").toggle(); 
+        });
+            
+            
+        $('a[name=toggle]').click(function() {          
+            var id;
+            var dis;
+            id = "#"+$(this).attr("title");
+            dis = "#"+$(this).attr("title")+"header";
+            $(id).slideToggle('slow', function() {
+                $(dis).toggle();
+            });
+        });
+    });
+
+</script>
+
+
+<div id="view-content">
+
+
+
+
+
+    <div id="ticket-info">
+
+        <div class="info-ticket">
+            <? if ($this->ticket->status == "0") { ?>
+                <h2>
+                    <img src="/images/icons/001_35.png" title="Aberto" alt="Aberto"/>
+                    Ticket Aberto
+                </h2>
+            <? } else if ($this->ticket->status == "1") { ?>
+                <h2>
+                    <img src="/images/icons/001_35.png" title="Aguardando Interação" alt="Aguardando Interação"/>
+                    Ticket Aguardando Interação
+                </h2>
+            <? } else if ($this->ticket->status == "2") { ?>
+                <h2>
+                    <img src="/images/icons/001_36.png" title="Finalizado" alt="Finalizado"/>
+                    Ticket Finalizado
+                </h2>
+            <? } else if ($this->ticket->status == "2") { ?>
+                <h2>
+                    <img src="/images/icons/001_34.png" title="Cancelado" alt="Cancelado"/>
+                    Ticket Cancelado
+                </h2>
+            <? } ?>
+            <h1>Ticket #<?= $this->ticket->numero ?> - <?= $this->ticket->assunto ?></h1>
+            <p>Por <strong> <?= $this->getNameUser($this->ticket->proprietario) ?> </strong> em <?= $this->FormatDate($this->ticket->data) ?></p>
+        </div>
+
+
+
+
+        <div class="data-ticket">
+            <strong>Departamento: </strong><br/> 
+            <?= ucfirst($this->ticket->departamento) ?>
+            <hr/>
+            <strong>Usuarios: </strong> <br/> 
+            <? foreach ($this->users as $user): ?>
+                <?= $this->getNameUser($user->usuario) ?> 
+                <br/>
+            <? endforeach; ?>
+
+            <hr/>
+            <strong>Prioridade: </strong> <br/> 
+            <?
+            if ($this->ticket->prioridade == "1") {
+                echo "Normal";
+            } else if ($this->ticket->prioridade == "0") {
+                echo "Urgente";
+            } else {
+                echo "baixa";
+            }
+            ?>
+            <hr/>
+            <strong>Anexo: </strong> <br/> 
+            <a target="_blank" href="/Uploads/Webdesk/<?=$this->ticket->arquivo ?>" ><?=$this->ticket->arquivo ?></a> <br/>
+        </div>
+
+        <?
+        $auth = Zend_Auth::getInstance();
+        $user = $auth->getStorage()->read();
+        if ($this->ticket->proprietario == $user->samaccountname && $this->ticket->status < "2" ) {
+            ?>
+            <br/>
+            <div class="clearfix"></div>
+            <a href="<?= $this->getUrl(array("module" => "webdesk", "controller" => "tickets", "action" => "closed", "ticket" => $this->ticket->numero)) ?>" id="links" class="black">
+                <img src="<?= $this->baseUrl('/images/icons/001_06.png') ?>" title="Fechar Ticket" alt="Fechar Ticket"/>
+                Fechar Ticket
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<?= $this->getUrl(array("module" => "webdesk", "controller" => "tickets", "action" => "close", "ticket" => $this->ticket->numero)) ?>" id="links" class="black">
+                <img src="<?= $this->baseUrl('/images/icons/001_02.png') ?>" title="Cancelar Ticket" alt="Cancelar Ticket"/>
+                Cancelar Ticket
+            </a>
+            <div class="clearfix"></div>
+        <? } ?>
+        <br/>
+        Historico do Ticket
+        <br/>
+
+        <div class="interacao-ticket">
+
+            <? foreach ($this->interacoes as $interacao): ?>
+
+                <div id="<?= $interacao->id ?>header" class="interacao-header-fixo">
+                    <h3>
+                        <a href="#interacao-ticket" title="<?= $interacao->id ?>" name="toggle"><?= $this->getNameUser($interacao->usuario) ?></a>
+                    </h3>
+                    <h4><?= $this->FormatDate($interacao->data) ?></h4>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div id="<?= $interacao->id ?>" class="interacao">
+                    <div class="interacao-header">
+                        <h3>
+                            <a href="#interacao-ticket" title="<?= $interacao->id ?>" name="toggle"><?= $this->getNameUser($interacao->usuario) ?></a>
+                        </h3>
+                        <h4><?= $this->FormatDate($interacao->data) ?></h4>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="interacao-description">
+                        <?= utf8_encode($interacao->descricao) ?>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="interacao-anexos">
+                        <strong>Anexos: </strong>
+                        <br/>
+                        <a target="_blank" href="/Uploads/Webdesk/<?= $interacao->anexo ?>" ><?= $interacao->anexo ?></a> <br/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            <? endforeach; ?>
+
+        </div>
+
+
+        <?= $this->formulario ?>
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,198 @@
+/* 
+    Document   : Forms
+    Created on : 21/08/2012, 14:02:46
+    Author     : fabiopratta
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+/*** ALL FORMS **/
+label {font-size: 16px;}
+
+
+input[type=text]{ 
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius:3px;
+    border: 1px #1d5987 solid;
+    padding: 5px;
+}
+
+input[type=text]:focus{ 
+    background-color: #ffedc6;
+}
+
+
+textarea:focus{
+     background-color: #ffedc6;
+}
+
+
+input[type=password]{ 
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius:3px;
+    border: 1px #1d5987 solid;
+    padding: 5px;
+}
+
+
+input[type=password]:focus{
+    background-color: #ffedc6;
+}
+
+input[type=submit]{ 
+
+    /* Para Mozilla/Gecko (Firefox etc) */
+    background: -moz-linear-gradient(top, #397ab0, #003663) repeat-X;
+    -moz-border-radius: 3px;
+    /* Para WebKit (Safari, Google Chrome etc) */
+   background: -webkit-gradient(linear, left top, left bottom, from(#397ab0), to(#003663)) repeat-X;
+   -webkit-border-radius:3px;
+   /* Para IE 8 */
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#397ab0, endColorstr=#003663)";
+   border-radius: 3px;
+   /* Para IE 5.5 - 7 */
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#397ab0, endColorstr=#003663);
+    
+   border: 1px #1d5987 solid;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   color: #fff;
+   font-size: 14px;
+}
+
+input[type=submit]:hover{
+    background: -moz-linear-gradient(top, #031f37, #397ab0) repeat-X;
+    background: -webkit-gradient(linear, left top, left bottom, from(#031f37), to(#397ab0)) repeat-X;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#031f37, endColorstr=#397ab0)";
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#031f37, endColorstr=#397ab0);
+}
+
+.form-errors{  
+    background-color: #fbefd6;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto; 
+    list-style: none;
+    text-align: left;
+}
+
+.form-errors li {
+    color: #cd0a0a;
+}
+
+.form-errors li ul{
+    color: red;
+    font-size: 12px;
+}
+
+
+
+
+/**** LOGIN FORM ***/
+#frmUsuario {
+    width: 350px;
+    margin-left: 10px;
+    background-color: #f7f7f7;
+    border: 6px solid #eeeeee;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    color: #003663;
+}
+
+
+
+
+.zend_form{
+background:#fff;
+margin:20px 0 0 0;
+padding:0;
+overflow:auto;
+font-family: "Lucida Sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif;
+}
+
+.zend_form dt{
+padding:5px;
+clear:both;
+width:100%;
+float:left;
+text-align:left;
+font-weight: bold;
+}
+
+.zend_form dt label{
+    color:#333333;
+    font-size: 12px;
+}
+
+
+.zend_form dd{
+padding:0;
+float:left;
+width:100%;
+margin:0;
+}
+
+
+.zend_form dd select {
+  -moz-box-sizing: border-box;
+  border: 1px solid #c6c6c6;
+  font-size: 14px;
+  margin-bottom: 2px;
+  padding: 4px;
+  margin-left: 13px;
+  width: 500px !important;
+}
+
+
+.zend_form dd input[type=text] {
+  border: 1px solid #c6c6c6;
+  font-size: 14px;
+  margin-bottom: 2px;
+  padding: 4px;
+  margin-left: 13px;
+  width: 490px !important;
+}
+
+
+.zend_form dd textarea {
+  border: 1px solid #c6c6c6;
+  font-size: 14px;
+  margin-bottom: 2px;
+  padding: 4px;
+  margin-left: 13px;
+  width: 490px !important;
+  height: 200px;
+}
+
+
+.zend_form p{
+padding:0;
+margin:0;
+}
+
+
+.required:before{content:'* '}
+
+.optional:before{content:'+ '}
+
+
+
+#frmCadInteracao textarea{
+  border: 1px solid #c6c6c6;
+  font-size: 14px;
+  margin-bottom: 2px;
+  padding: 4px;
+  margin-left: 13px;
+  width: 97% !important;
+  height: 130px;
+}
+
+#duplicar-element{margin-left: 10px;}
+#duplicar-element label{float: left; margin: 5px; font-size: 12px;}
+#duplicar-element label input{ float: left;}

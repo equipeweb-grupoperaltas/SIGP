@@ -1,0 +1,58 @@
+<?= $this->doctype() ?>
+<html>
+    <head>
+        <?= $this->headMeta() ?>
+        <?= $this->headTitle() ?>
+        <?= $this->JQuery()->setVersion('1.8.0')->setUiVersion('1.8.23')->enable()->uiEnable(); ?>
+        <?=
+        $this->headScript()->appendFile($this->baseUrl("/javascript/jquery/jquery.maskinput.js"))
+                ->appendFile($this->baseUrl("/javascript/jquery/jquery.modal.js"))
+                ->appendFile($this->baseUrl("/javascript/DataSort/media/js/jquery.dataTables.js"))
+                ->appendFile($this->baseUrl("/javascript/jquery/jquery.ui.datetime.js"));
+        ?>
+
+        <?=
+        $this->headLink()->appendStylesheet($this->baseUrl("/stylesheet/jquery-ui/redmond/jquery-ui-1.8.23.custom.css"))
+                ->appendStylesheet($this->baseUrl("/stylesheet/Fonts.css"))
+                ->appendStylesheet($this->baseUrl("/stylesheet/Boot.css"))
+                ->appendStylesheet($this->baseUrl("/stylesheet/Layout.css"))
+                ->appendStylesheet($this->baseUrl("/stylesheet/Forms.css"))
+                ->appendStylesheet($this->baseUrl("/stylesheet/allsystem.css"))
+                ->appendStylesheet($this->baseUrl("/javascript/DataSort/media/css/jquery.dataTables.css"));
+        ?>
+
+    </head>
+    <body>
+
+        <!-- BEGIN HEADER SECTION -->
+        <section id="header-content">
+            <div class="header-division" style="text-align: left; padding-left: 20px;">
+                <a href="/" alt="Voltar ao inicio" title="Voltar ao inicio">
+                    <img src="<?= $this->baseUrl("/images/logotipo.png") ?>" alt="Sigp - Geupo Peraltas" title="Sigp - Grupo Peraltas" /> 
+                </a>
+            </div>
+            <div class="header-division-bg">
+                <img src="<?= $this->baseUrl("/images/icons/user_suit.png") ?>" alt="Sigp - Geupo Peraltas" title="Sigp - Grupo Peraltas" />
+                <h2>
+                    <?
+                    $auth = Zend_Auth::getInstance();
+                    $user = $auth->getStorage()->read();
+                    if ($user) {
+                        echo "Olá " . $user->name . "</h2>";
+                        echo '  <a href="/login/logout"> Sair do Sistema </a>';
+                    } else {
+                        echo "Olá Visitante" . "</h2>";
+                        ;
+                    }
+                    ?>
+            </div>
+            <div class="header-division">
+                <img src="<?= $this->baseUrl("/images/sigp.png") ?>" alt="Sigp - Geupo Peraltas" title="Sigp - Grupo Peraltas" /> 
+            </div>
+        </section>
+        <div class="clearfix"></div>
+        <!-- END HEADER SECTION --> 
+
+
+
+

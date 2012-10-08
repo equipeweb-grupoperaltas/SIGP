@@ -1,0 +1,18 @@
+<div id="col-left-fixed">
+    <ul id="submenu-sections">
+        <li class="<? if ($this->getActionName() == "all"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/all">
+            <a href="/webdesk/tickets/all">Todos </a>
+        </li>
+        <li class="<? if ($this->getActionName() == "unfinished"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/unfinished">
+            <a href="/webdesk/tickets/unfinished">Em andamento </a>
+        </li>
+        <li class="<? if ($this->getActionName() == "finished"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/finished">
+            <a href="/webdesk/tickets/finished">Finalizados </a>
+        </li>
+          <li class="<? if ($this->getActionName() == "canceled"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/canceled">
+            <a href="/webdesk/tickets/canceled">Cancelados </a>
+        </li>
+        
+       
+    </ul>
+</div>
