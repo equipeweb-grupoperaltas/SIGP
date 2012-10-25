@@ -243,6 +243,10 @@ section[id=content-webdesk]{
 .legend .p6 {width: 20px; height: 20px; background-color:red;}
 .legend .p7 {width: 20px; height: 20px; background-color:#990000;}
 
+.odd { background-color: #E2E4FF; }
+.even { background-color: white; }
+
+
 
 /** Urgente  + 3 dias */
 .urgm3 {background-color:#ff6666; color:#333; }
@@ -256,4 +260,10 @@ section[id=content-webdesk]{
 .baim3 {background-color:#ccffcc; color:#333;}
 /** baixo - 3 dias **/
 .baim2 {background-color:#006600; color:#fff;}
+/** Expirado **/
+.expirado{background-color: #990000; color: #fff;}
+.error{background-color: #990000; padding: 10px; color: #fff;}
+
+
+
 

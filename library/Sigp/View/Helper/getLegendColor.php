@@ -24,25 +24,34 @@ class Sigp_View_Helper_getLegendColor extends Zend_View_Helper_Abstract {
      */
     public function getLegendColor($prioridade, $datalimite) {
 
-        if ($datalimite == "0000-00-00 00:00:00") {
-            return false;
+        if ($datalimite == "0000-00-00 00:00:00" && $prioridade == "0") {
+            $this->class = "urgm3";
+        } else if ($datalimite == "0000-00-00 00:00:00" && $prioridade == "1") {
+            $this->class = "norm2";
+        } else if ($datalimite == "0000-00-00 00:00:00" && $prioridade == "2") {
+            $this->class = "baim2";
         } else {
-            //Urgente + 2 dias
-            if ($prioridade == "0" && $this->diferencaDias($datalimite) > 3) {
-                $this->class = "urgm3";
-            } else if ($prioridade == "0" && $this->diferencaDias($datalimite) <= 2) {
-                $this->class = "urgm2";
-            } else if ($prioridade == "1" && $this->diferencaDias($datalimite) > 3) {
-                $this->class = "norm3";
-            } else if ($prioridade == "1" && $this->diferencaDias($datalimite) <= 2) {
-                $this->class = "norm2";
-            } else if ($prioridade == "2" && $this->diferencaDias($datalimite) > 3) {
-                $this->class = "baim3";
-            } else if ($prioridade == "2" && $this->diferencaDias($datalimite) <= 2) {
-                $this->class = "baim2";
+
+            if ($datalimite < date("Y-m-d H:i:s")) {
+               $this->class = "expirado";  
+            } else {
+                //Urgente + 2 dias
+                if ($prioridade == "0" && $this->diferencaDias($datalimite) > 3) {
+                    $this->class = "urgm3";
+                } else if ($prioridade == "0" && $this->diferencaDias($datalimite) <= 2) {
+                    $this->class = "urgm2";
+                } else if ($prioridade == "1" && $this->diferencaDias($datalimite) > 3) {
+                    $this->class = "norm3";
+                } else if ($prioridade == "1" && $this->diferencaDias($datalimite) <= 2) {
+                    $this->class = "norm2";
+                } else if ($prioridade == "2" && $this->diferencaDias($datalimite) > 3) {
+                    $this->class = "baim3";
+                } else if ($prioridade == "2" && $this->diferencaDias($datalimite) <= 2) {
+                    $this->class = "baim2";
+                }
             }
-            return $this->class;
         }
+        return $this->class;
     }
 
     /**

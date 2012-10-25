@@ -9,10 +9,20 @@
         <li class="<? if ($this->getActionName() == "finished"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/finished">
             <a href="/webdesk/tickets/finished">Finalizados </a>
         </li>
-          <li class="<? if ($this->getActionName() == "canceled"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/canceled">
+        <li class="<? if ($this->getActionName() == "canceled"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/tickets/canceled">
             <a href="/webdesk/tickets/canceled">Cancelados </a>
         </li>
+
+        <hr size="1px"/>
+
+        <li class="<? if ($this->getControllerName() == "departamentos"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/departamentos/list">
+            <a href="/webdesk/departamentos/list">Departamentos</a>
+        </li>
         
-       
+        
+        <li class="<? if ($this->getControllerName() == "parceiros"): ?> selected  <? endif; ?> clickable" data-href="/webdesk/parceiros/list">
+            <a href="/webdesk/parceiros/list">Parceiros</a>
+        </li>
+
     </ul>
 </div>

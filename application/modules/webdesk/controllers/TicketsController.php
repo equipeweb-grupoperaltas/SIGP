@@ -207,7 +207,7 @@ class Webdesk_TicketsController extends Zend_Controller_Action {
 
         $numero = $this->_request->getParam('ticket');
         $alterSta = new Application_Model_Tickets();
-        $alterSta->updateStatus($numero, 2);
+        $alterSta->closeTicket($numero);
 
         $this->_redirect('/webdesk/tickets/finished');
     }

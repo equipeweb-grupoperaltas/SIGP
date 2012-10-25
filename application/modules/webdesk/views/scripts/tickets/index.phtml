@@ -54,6 +54,7 @@
             <? } ?>
             <h1>Ticket #<?= $this->ticket->numero ?> - <?= $this->ticket->assunto ?></h1>
             <p>Por <strong> <?= $this->getNameUser($this->ticket->proprietario) ?> </strong> em <?= $this->FormatDate($this->ticket->data) ?></p>
+            <p>Data Limite até <strong> <?= $this->FormatDate($this->ticket->datalimite) ?></strong></p>
         </div>
 
 
@@ -153,3 +154,5 @@
 
 
 </div>
+
+<br/><br/><br/>

@@ -19,10 +19,23 @@ class Sigp_Form_cadTicket extends Zend_Form {
          */
         $departamento = new Zend_Form_Element_Select('departamento');
         $departamento->setLabel("Departamento (Obrigatório):")->setRequired(true);
-        //Model       
+    
+        
+        $departamentosAll = array();
+        
+        //Model AD
         $departamentos = new Application_Model_DepartamentosAd();
-        $departamento->addMultiOptions($departamentos->getDepartaments());
-
+        
+        //Model DB
+        $departamentosDb = new Application_Model_DepartamentosDb();
+       
+        //Merge Array
+        $departamentosAll = array_merge($departamentos->getDepartaments());
+        
+        //Add
+        $departamento->addMultiOptions($departamentosAll);
+        $departamento->addMultiOptions($departamentosDb->fetchPairs());
+       
 
         /**
          * Users of Departaments 

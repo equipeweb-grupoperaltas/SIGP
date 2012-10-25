@@ -31,48 +31,56 @@
             <tbody>
                 <?php if (sizeof($this->paginator)): ?>
 
-               <script type="text/javascript">
+                <script type="text/javascript">
                     $(document).ready(function() {
                         $('#list-ticktes').dataTable({
                             "bLengthChange": false,
                             "aaSorting": [[ 3, "desc" ]]
                         });
-                    } );
+                    });
                 </script>
-                <?php foreach ($this->paginator as $ticket): ?>
 
-                    <tr>  
+                
+                <?php
+                foreach ($this->paginator as $ticket):
+                    ?>
+                    <tr>   
                         <td>
+
                             <a href="<?= $this->getUrl(array("module" => "webdesk", "controller" => "tickets", "action" => "index", "ticket" => $ticket->numero)) ?>">
                                 <?= $ticket->numero ?>
                             </a>
                         </td>
-                        <td><? if ($ticket->prioridade == "1") {
+                        <td><?
+                        if ($ticket->prioridade == "1") {
                             echo "Normal";
                         } else if ($ticket->prioridade == "0") {
                             echo "Urgente";
                         } else {
                             echo "baixa";
-                        } ?></td>
+                        }
+                                ?></td>
                         <td><?= $ticket->assunto ?></td>
                         <td><?= $ticket->data ?></td>
-                        <td><? if ($ticket->status == "0") {
-                echo "Pendente";
-            } elseif ($ticket->status == "1") {
-                echo "Aguardando Interação";
-            } elseif ($ticket->status == "2") {
-                echo "Finalizado";
-            } else {
-                echo "Cancelado";
-            } ?></td>
+                        <td><?
+                    if ($ticket->status == "0") {
+                        echo "Pendente";
+                    } elseif ($ticket->status == "1") {
+                        echo "Aguardando Interação";
+                    } elseif ($ticket->status == "2") {
+                        echo "Finalizado";
+                    } else {
+                        echo "Cancelado";
+                    }
+                                ?></td>
                     </tr>
 
-    <?php endforeach; ?>
-<?php else: ?>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
                     <td colspan="4">Nenhum ticket em seu nome!</td>
                 </tr>
-<?php endif; ?>
+            <?php endif; ?>
             </tbody>
 
 

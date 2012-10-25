@@ -1,0 +1,17 @@
+<!--
+ *@author Fabio Pratta <fabiobrotas@hotmail.com> 
+ *@copyright Copyright - SIGP
+ *@version 1.0 25/10/2012
+-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#telefone").mask("(99) 99999-9999");
+    });
+</script>
+<div class="clearfix"></div>
+<div id="view-content">
+    <h1>Editar Parceiro</h1>
+    <?= $this->formulario ?>
+    * Caso o telefone nao possua 5 digitos na 1 sequencia utilize 0 na frente ex: 03466-0987
+</div>
+<div class="clearfix"></div>
