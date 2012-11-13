@@ -17,6 +17,7 @@ class Application_Model_UsuariosAd {
     private $config;
     private $options;
     private $retUsers = array();
+    private $user;
 
     /**
      * set configs and options 
@@ -83,7 +84,7 @@ class Application_Model_UsuariosAd {
         foreach ($this->options as $ad) {
             $fields = array('displayname', 'mail', 'samaccountname');
             $ldap = new Zend_Ldap($ad);
-            $users = $ldap->search('(&(objectClass=user)(samaccountname='.$user.'))', 'OU=Fazenda,  ' . $ad['baseDn'] . ' ', Zend_Ldap::SEARCH_SCOPE_SUB, $fields);
+            $users = $ldap->search('(&(objectClass=user)(samaccountname=' . $user . '))', 'OU=Fazenda,  ' . $ad['baseDn'] . ' ', Zend_Ldap::SEARCH_SCOPE_SUB, $fields);
 
             foreach ($users as $user) {
                 $description = $user['displayname'][0];
@@ -92,10 +93,29 @@ class Application_Model_UsuariosAd {
 
         return $description;
     }
+
+    /**
+     * GetUserData 
+     * @param type $user
+     */
+    public function getUserData($userN) {
+        
+        foreach ($this->options as $ad) {
+         $fields = array('displayname', 'mail', 'samaccountname','mobile');
+            $ldap = new Zend_Ldap($ad);
+            $users = $ldap->search('(&(objectClass=user)(samaccountname='.$userN.'))' , '' . $ad['baseDn'] . ' ', Zend_Ldap::SEARCH_SCOPE_SUB, $fields);
+            foreach ($users as $user) {
+                $userR['displayname'] = $user['displayname'][0];
+                $userR['mail'] = $user['mail'][0];
+                $userR['mobile'] = $user['mobile'][0];
+            }
+         return $userR;
+        
+        }
+    }
     
     
- 
     
+
 }
 
-    

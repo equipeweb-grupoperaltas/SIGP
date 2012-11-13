@@ -78,7 +78,7 @@ class Application_Model_Auth {
         $result = $auth->authenticate($adapter);
         //Verifica se o login foi efetuado com sucesso
         if ($result->isValid()) {
-            $array =  $adapter->getAccountObject();   
+            $array =  $adapter->getAccountObject();    
             $storage = $auth->getStorage();
             $storage->write($array);
             self::$instance == true;

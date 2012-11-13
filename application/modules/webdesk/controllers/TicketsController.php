@@ -8,9 +8,6 @@ class Webdesk_TicketsController extends Zend_Controller_Action {
 
     /**
      * View Ticket Infos 
-     *
-     *
-     *
      */
     public function indexAction() {
 
@@ -169,11 +166,11 @@ class Webdesk_TicketsController extends Zend_Controller_Action {
 
 
                 $dataIn['datalimite'] = $dataLimite;
-                
+
                 $dataIn['datacriacao'] = date("Y-m-d H:i:s");
-                
-                $dataIn['duplicar'] = "".$formCad->getValue("duplicar");
-                
+
+                $dataIn['duplicar'] = "" . $formCad->getValue("duplicar");
+
                 // 0 nao | 1 Sim
                 $dataIn['expirado'] = 0;
 
@@ -185,12 +182,33 @@ class Webdesk_TicketsController extends Zend_Controller_Action {
 
                 $users = $formCad->getValue("usuario");
 
+                $telefones = array();
+                
                 foreach ($users as $user) {
-                    $insTicket = new Application_Model_DbTable_Tickets();
-                    $dataIn['usuario'] = $user; 
-                    $insTicket->insert($dataIn);
-                }
 
+                    //Insert Users
+                    $insTicket = new Application_Model_DbTable_Tickets();
+                    $dataIn['usuario'] = $user;
+                    $insTicket->insert($dataIn);
+                    //get Info User
+                    $user = new Application_Model_UsuariosAd();
+                    $usuario = $user->getUserData($dataIn['usuario']);
+
+                    //get User open ticket
+                    $auth = Zend_Auth::getInstance();
+                    $user = $auth->getStorage()->read();
+
+                    //Send SMS 
+                    $telefones[] = $usuario['mobile'];
+                   
+                }
+                
+                
+                    $sms = new Application_Model_sendSMS();
+                    $sms->setMsg("Novo Ticket aberto por $user->name com assunto $dataIn[assunto] Ticket N.: $dataIn[numero]!");
+                    $sms->send($telefones); 
+
+              
 
                 $this->_redirect('/webdesk/tickets/unfinished');
             }
@@ -225,8 +243,12 @@ class Webdesk_TicketsController extends Zend_Controller_Action {
         $this->_redirect('/webdesk/tickets/canceled');
     }
 
-    public function myticketsAction() {
-        // action body
+    public function sendmsgAction() {
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $Sms = new Application_Model_sendSMS();
+        $Sms->setMsg("Existem Tickets em Aberto em seu nome acesse o sistema");
+        $Sms->send();
     }
 
 }

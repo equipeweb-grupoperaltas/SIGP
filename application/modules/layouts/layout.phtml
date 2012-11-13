@@ -6,29 +6,6 @@ $module = $this->getModuleName();
 
 switch ($module) {
     
-    //LOGIN
-    case "authenticate":
-        ?>
-        <!-- BEGIN MENU LEFT SECTION -->
-        <section id="content">
-            <?= $this->layout()->content ?>      
-        </section>
-        <!-- END MENU LEFT SECTION -->  
-        <?
-        break;
-    
-    
-    //LOGIN
-    case "default":
-        ?>
-        <!-- BEGIN MENU LEFT SECTION -->
-        <section id="content">
-            <?= $this->layout()->content ?>      
-        </section>
-        <!-- END MENU LEFT SECTION -->  
-        <?
-        break;
-
     //WEBDESK
     case "webdesk":
         ?>
@@ -56,6 +33,15 @@ switch ($module) {
         break;
 
     default:
+        
+        ?>
+        <!-- BEGIN MENU LEFT SECTION -->
+        <section id="content">
+            <?= $this->layout()->content ?>      
+        </section>
+        <!-- END MENU LEFT SECTION -->  
+        <?
+        
         break;
 }
 ?>
