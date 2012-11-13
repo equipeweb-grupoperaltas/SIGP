@@ -200,16 +200,19 @@ class Webdesk_TicketsController extends Zend_Controller_Action {
 
                     //Send SMS 
                     $telefones[] = $usuario['mobile'];
+                    
+                    //Send Mail
+                    $msg = "Novo Ticket aberto por $user->name com assunto $dataIn[assunto] Ticket N.: $dataIn[numero]!";
+                    $mail = $usuario['mail']; 
+                    $email = new Application_Model_sendMail();
+                    $email->send($usuario['displayname'], $mail, "Novo Ticket em seu nome", $msg);
                    
                 }
                 
-                
+                    $msg = "Novo Ticket aberto por $user->name com assunto $dataIn[assunto] Ticket N.: $dataIn[numero]!";
                     $sms = new Application_Model_sendSMS();
-                    $sms->setMsg("Novo Ticket aberto por $user->name com assunto $dataIn[assunto] Ticket N.: $dataIn[numero]!");
+                    $sms->setMsg($msg);
                     $sms->send($telefones); 
-
-              
-
                 $this->_redirect('/webdesk/tickets/unfinished');
             }
         }
